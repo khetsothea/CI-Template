@@ -32,7 +32,17 @@ class User_model extends MY_Model
 	
 	public function authenticate($password)
 	{
+		$CI = get_instance();
+		$CI->load->library('bcrypt', $CI->config->item('bcrypt_rounds'));
 		
+		if ($CI->bcrypt->verify($password, $this->password))
+		{
+			return true;
+		}
+		else
+		{
+			throw new UserException('password_mismatch');
+		}
 	}
 	
 }
@@ -52,13 +62,17 @@ class UserException extends Exception
 				return 'Multiple rows found, this is not a primary key.';
 			break;
 			
+			case 'password_mismatch':
+				return 'Your Username / Password is wrong.';
+			break;
+			
 			default:
 				return 'Unknown User Error';
 			break;
 		}
 	}
 	
-	public function __construct($err_msg, $err_code)
+	public function __construct($err_msg, $err_code = null)
 	{
 		// Pass the error message and error code to php Exception class
 		parent::__construct(UserException::get_error_message($err_msg), $err_code);

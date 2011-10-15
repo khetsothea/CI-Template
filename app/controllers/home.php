@@ -24,7 +24,7 @@ class Home extends Frontend_Controller {
 		{
 			// Form validation passed
 			$user = new User_model();
-			$this->load->library('bcrypt', array('rounds' => 7));
+			$this->load->library('bcrypt', $this->config->item('bcrypt_rounds'));
 			
 			try{
 				

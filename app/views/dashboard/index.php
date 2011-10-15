@@ -1,1 +1,1 @@
-		<h1>Welcome <?=$user->display_name?></h1>
+		<h2>Welcome <?=$user->display_name?></h2>
