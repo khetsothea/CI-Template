@@ -1,0 +1,531 @@
+/*
+ *	Eric Meyer modified reset
+ */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* html 5 reset */
+header,
+footer,
+nav,
+section,
+article,
+menu,
+aside,
+time {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+/* http://sonspring.com/journal/clearing-floats */
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+.clearfix:after {
+  clear: both;
+  content: ' ';
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.clearfix {
+  display: inline-block;
+}
+* html .clearfix {
+  height: 1%;
+}
+.clearfix {
+  display: block;
+}
+.gridlast {
+  margin-right: 0;
+}
+/* ==================================================================================================================== */
+/* ! The 1140px Grid V2 by Andy Taylor \ http://cssgrid.net \ http://www.twitter.com/andytlr \ http://www.andytlr.com   */
+/* ==================================================================================================================== */
+.container {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.row {
+  width: 100%;
+  max-width: 1140px;
+  min-width: 755px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.onecol,
+.twocol,
+.threecol,
+.fourcol,
+.fivecol,
+.sixcol,
+.sevencol,
+.eightcol,
+.ninecol,
+.tencol,
+.elevencol {
+  margin-right: 3.8%;
+  float: left;
+  min-height: 1px;
+}
+.row .onecol {
+  width: 4.85%;
+}
+.row .twocol {
+  width: 13.45%;
+}
+.row .threecol {
+  width: 22.05%;
+}
+.row .fourcol {
+  width: 30.75%;
+}
+.row .fivecol {
+  width: 39.45%;
+}
+.row .sixcol {
+  width: 48%;
+}
+.row .sevencol {
+  width: 56.75%;
+}
+.row .eightcol {
+  width: 65.4%;
+}
+.row .ninecol {
+  width: 74.05%;
+}
+.row .tencol {
+  width: 82.7%;
+}
+.row .elevencol {
+  width: 91.35%;
+}
+.row .twelvecol {
+  width: 100%;
+  float: left;
+}
+.last {
+  margin-right: 0px;
+}
+img, object, embed {
+  max-width: 100%;
+}
+img {
+  height: auto;
+}
+/* Smaller screens */
+@media only screen and (max-width: 1023px) {
+  body {
+    font-size: 0.8em;
+    line-height: 1.5em;
+  }
+}
+/* Mobile */
+@media handheld, only screen and (max-width: 767px) {
+  body {
+    font-size: 16px;
+    -webkit-text-size-adjust: none;
+  }
+  .row, body, .container {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .row .onecol,
+  .row .twocol,
+  .row .threecol,
+  .row .fourcol,
+  .row .fivecol,
+  .row .sixcol,
+  .row .sevencol,
+  .row .eightcol,
+  .row .ninecol,
+  .row .tencol,
+  .row .elevencol,
+  .row .twelvecol {
+    width: auto;
+    float: none;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+/* Colours
+--------------------------------------------------*/
+/* Containers
+--------------------------------------------------*/
+#wrapper {
+  width: 100%;
+  max-width: 30em;
+  margin: 2em auto;
+}
+section {
+  margin: 0 0 1.667em;
+  /* 30px */
+
+  padding: 0 0 1.667em;
+  /* 30px */
+
+  border-bottom: dotted 1px #e3f3ec;
+}
+/* Header */
+header nav ul {
+  margin: 0;
+  padding: 1.667em 0;
+  border-bottom: solid 1px #e3f3ec;
+}
+header nav ul li {
+  display: inline-block;
+  margin: 0 1.667em 0 0;
+  /* 30px */
+
+}
+header nav ul li:last-child {
+  margin: 0;
+}
+header nav ul li a {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  text-decoration: none;
+}
+/* Footer */
+footer {
+  font-size: 0.778em;
+  /* 14px */
+
+}
+/* Lists
+--------------------------------------------------*/
+ul, ol {
+  display: block;
+  margin: 0 0.833em 1.667em;
+  /* 30px / 15px */
+
+  list-style: square;
+}
+ol {
+  list-style: decimal;
+}
+ul li, ol li {
+  margin: 0.833em;
+  /* 15px */
+
+}
+/* Forms
+--------------------------------------------------*/
+form ol {
+  margin: .833em 0;
+  /* 15px */
+
+  list-style: none;
+}
+form ol li {
+  margin: 0.833em 0;
+  /* 15px */
+
+}
+form label {
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.778em;
+  /* 14px */
+
+  font-weight: 900;
+  color: #3e5048;
+  text-transform: uppercase;
+}
+form .req {
+  color: #e80042;
+}
+form label .req {
+  margin-right: .833em;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="number"],
+textarea,
+select {
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  /* 18px */
+
+  color: #87807b;
+  padding: .556em;
+  /* 10px */
+
+  border: solid 1px #e3f3ec;
+  border-radius: 4px;
+  outline: none;
+  /* remove safari & chrome outer glow */
+
+  box-sizing: border-box;
+  width: 100%;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #3e5048;
+}
+textarea {
+  min-height: 8em;
+}
+input[type="submit"] {
+  padding: .556em;
+  /* 10px */
+
+  font-size: 1em;
+  /* 18px */
+
+  color: #ffffff;
+  background: #11c175;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background: #1b2e26;
+}
+/* Typography
+--------------------------------------------------*/
+html {
+  font-size: 100%;
+}
+/* Set font size to browser default (16px) */
+body {
+  font-family: Georgia, serif;
+  font-size: 1.125em;
+  /* 18px */
+
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.667em;
+  /* 30px */
+
+  color: #87807b;
+}
+/* Links */
+a {
+  color: #0089e0;
+}
+a:hover {
+  color: #004c9a;
+}
+a:active {
+  background: #e3f3ec;
+  color: #004c9a;
+}
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: #11c175;
+}
+h1 {
+  color: #1b2e26;
+  font-size: 2.667em;
+  /* 48px */
+
+  line-height: 1.250em;
+  /* 60px */
+
+  margin: 0 0 .625em;
+  /* 30px */
+
+}
+h2 {
+  font-size: 2.000em;
+  /* 36px */
+
+  line-height: 1.250em;
+  /* 45px */
+
+  margin: .625em 0;
+  /* 30px */
+
+}
+h3 {
+  color: #3e5048;
+  font-size: 1.333em;
+  /* 24px */
+
+}
+h4 {
+  font-size: 1em;
+  /* 18px */
+
+}
+/* Standard text */
+p, li {
+  margin: 0 0 .833em;
+  /* 15px */
+
+}
+/* Blockquotes */
+blockquote {
+  padding: 1.667em;
+  background: #1b2e26;
+  color: #ffffff;
+}
+blockquote p:last-child {
+  margin: 0;
+}
+blockquote cite {
+  display: block;
+  text-align: right;
+  font-size: 0.778em;
+  color: #11c175;
+}
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+@media only screen and (max-width: 1023px) {
+  
+}
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+@media handheld, only screen and (max-width: 767px) {
+  
+}
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  /*	.logo {
+  		background: url(logo2x.jpg) no-repeat;
+  		background-size: 212px 303px;
+  	}*/
+}
