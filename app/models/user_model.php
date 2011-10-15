@@ -83,4 +83,4 @@ class UserException extends Exception
 }
 
 /* End of file user_model.php */
-/* Location: ./application/models/user_model.php */
+/* Location: ./app/models/user_model.php */

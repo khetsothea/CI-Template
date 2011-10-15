@@ -5,7 +5,9 @@ class MY_Model extends CI_Model
 	protected 	$db_table = NULL;     // the name of the database table the model uses
 	protected 	$primary_key = NULL;  // the column name of the primary key
 	protected 	$fields = array();	  // an array to store the single value variables for the model
-	public 	$id = NULL;               // the ID for the object
+	public 	    $id = NULL;           // the ID for the object
+	
+	
 	
 	public function __construct()
 	{
@@ -14,6 +16,14 @@ class MY_Model extends CI_Model
 
 
 
+	/**
+	*	set_params
+	*
+	*	Sets up MY_Model with table name, field list and primary key column
+	*
+	*	@access public
+	*	@return none
+	*/
 	protected function set_params($db_table, $fields, $primary_key = 'id')
 	{
 		if( ! $db_table || ! $fields )
@@ -75,7 +85,7 @@ class MY_Model extends CI_Model
     *	@access protected
     *	@return none
     */
-	protected function populate( $row )
+	protected function populate($row)
 	{
 		$pri_key = $this->primary_key;
 		
@@ -193,7 +203,8 @@ class MY_Model extends CI_Model
     *	@access protected
     *	@return int
     */
-	public function count( $params = NULL ) {
+	public function count($params = NULL)
+	{
 		$CI = get_instance();
 		if (is_array($params)) {
 			foreach ($params AS $key => $value) {
@@ -247,7 +258,7 @@ class MY_Model extends CI_Model
 	*	Override in inheriting class if you need to do more
 	*	clever things that just get from a single table
 	*/
-	public function find_where( $params = array() )
+	public function find_where($params = array())
     {
 	    $exceptions	= array( 'limit', 'offset', 'order' );
 		$limit 		= array_key_exists( 'limit', $params) ? $params['limit'] : NULL;
@@ -270,8 +281,7 @@ class MY_Model extends CI_Model
 
     	$CI->db->order_by($order);
 
-    	$CI->db->select(	'x.'.$this->primary_key.' as id,
-							x.*');
+    	$CI->db->select( 'x.*');
 
     	$CI->db->from($this->db_table.' x');
 		$CI->db->limit($limit, $offset);

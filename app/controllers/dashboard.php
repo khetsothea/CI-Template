@@ -76,4 +76,4 @@ class Dashboard extends App_Controller {
 }
 
 /* End of file dashboard.php */
-/* Location: ./application/controllers/dashboard.php */
+/* Location: ./app/controllers/dashboard.php */

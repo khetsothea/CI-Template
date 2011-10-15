@@ -12,30 +12,8 @@ class Base_Controller extends CI_Controller
 		$this->data['app_name'] = $this->config->item('app_name');
 		$this->data['site_title'] = $this->config->item('site_title');
 	}
-}
-
-// Front end site stuff
-class Frontend_Controller extends Base_Controller
-{
-	public function __construct()
-	{
-		parent::__construct();
-	}
-}
-
-// Logged in app stuff
-class App_Controller extends Base_Controller
-{
-	public $user = null; // The current users object
 	
-	public function __construct()
-	{
-		parent::__construct();
-		
-		$this->check_user_logged_in();
-	}
-	
-	public function check_user_logged_in()
+	protected function check_user_logged_in()
 	{
 		$user_id = $this->session->userdata('user_id');
 		
@@ -71,11 +49,55 @@ class App_Controller extends Base_Controller
 	}
 }
 
-// Admin area stuff
-class Admin_Controller extends Base_Controller
+// Front end site stuff
+class Frontend_Controller extends Base_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
 }
+
+// Logged in app stuff
+class App_Controller extends Base_Controller
+{
+	public $user = null; // The current users object
+	
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->check_user_logged_in();
+	}
+}
+
+// Admin area stuff
+class Admin_Controller extends Base_Controller
+{
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->check_user_logged_in();
+		
+		$this->check_user_is_admin();
+	}
+	
+	private function check_user_is_admin()
+	{
+		if ($this->data['user']->admin != 1)
+		{
+			// User not supposed to be here, put them to the dashboard.
+			$this->session->set_flashdata('error', 'You are not an admin, don\'t be silly.');
+			redirect('/dashboard');
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+}
+
+/* End of file MY_Controller.php */
+/* Location: ./app/controllers/MY_Controller.php */
