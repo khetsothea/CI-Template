@@ -16,13 +16,14 @@ This is my base codeigniter template for quickly starting any new apps, assuming
 * [Toast](http://jensroland.com/projects/toast/) unit testing library installed.
 * jQuery and jQuery tools
 * site config for a few custom config items
-* .htaccess for apache mod_rewrite
+* .htaccess for apache mod rewrite
 
 ## Setup instructions
 You can set this up just like any other codeigniter install, the only things you will need to do are:
-1. Create a database.
-2. Put the details into `app/config/database.php` and remove my local ones ;)
-3. Create a users table, syntax below.
+
+* Create a database.
+* Put the details into `app/config/database.php` and remove my local ones ;)
+* Create a users table, syntax below.
 
 ```sql
 CREATE TABLE `users` (
