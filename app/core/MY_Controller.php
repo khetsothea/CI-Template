@@ -29,6 +29,13 @@ class App_Controller extends Base_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->check_user_logged_in();
+	}
+	
+	public function check_user_logged_in()
+	{
+		
 	}
 }
 

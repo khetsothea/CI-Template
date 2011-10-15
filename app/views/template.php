@@ -16,6 +16,7 @@
 <body>
 
 <div id="wrapper">
+
 	<header id="page_header">
 		<h1><?=$site_title;?></h1>
 		<nav>
@@ -23,15 +24,15 @@
 				<li><a href="<?=site_url('/');?>">Homepage</a></li>
 			</ul>
 		</nav>
-	</header>
+	</header><!-- end #page_header -->
 	   
 	<section id="content">
 		<?=$content;?>
-	</section>
+	</section><!-- end #content -->
 	
 	<footer id="page_footer">
 		<p>&copy; Copyright <?=date('Y');?> <?=$app_name;?></p>
-	</footer>
+	</footer><!-- end #page_footer -->
 
 </div><!-- end #wrapper -->
 

@@ -7,6 +7,15 @@ class Home extends Frontend_Controller {
 		$this->template->write_view('content', 'home/index', $this->data);
 		$this->template->render();
 	}
+	
+	public function profile()
+	{
+		$user = new User_model();
+		
+		$user->find(1);
+		
+		echo $user->email;
+	}
 }
 
 /* End of file home.php */
