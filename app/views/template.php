@@ -27,6 +27,15 @@
 	</header><!-- end #page_header -->
 	   
 	<section id="content">
+		<?php if ($this->session->flashdata('success')): ?>
+			<p class="info success"><?=$this->session->flashdata('success')?></p>
+		<?php endif; ?>
+		<?php if ($this->session->flashdata('notice')): ?>
+			<p class="info notice"><?=$this->session->flashdata('notice')?></p>
+		<?php endif; ?>
+		<?php if ($this->session->flashdata('error')): ?>
+			<p class="info error"><?=$this->session->flashdata('error')?></p>
+		<?php endif; ?>
 		<?=$content;?>
 	</section><!-- end #content -->
 	

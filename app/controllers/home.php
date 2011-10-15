@@ -8,13 +8,44 @@ class Home extends Frontend_Controller {
 		$this->template->render();
 	}
 	
-	public function profile()
+	public function register()
 	{
-		$user = new User_model();
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('email', 'Email address', 'required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required|matches[conf_password]');
+		$this->form_validation->set_rules('conf_password', 'Confirm Password');
 		
-		$user->find(1);
-		
-		echo $user->email;
+		if ($this->form_validation->run() === false)
+		{
+			$this->template->write_view('content', 'home/register', $this->data);
+			$this->template->render();
+		}
+		else
+		{
+			// Form validation passed
+			$user = new User_model();
+			$this->load->library('bcrypt', array('rounds' => 7));
+			
+			try{
+				
+				// Set the users details
+				$user->username = $this->input->post('username');
+				$user->email = $this->input->post('email');
+				$user->password = $this->bcrypt->hash($this->input->post('password'));
+				
+				// Save the user
+				$user->add();
+				
+				$this->session->set_flashdata('success', 'Your user has been created');
+				redirect('/home');
+				exit;
+			}
+			catch (Exception $e){
+				$this->session->set_flashdata('error', $e->getMessage());
+				redirect(current_url());
+				exit;
+			}
+		}
 	}
 }
 
