@@ -1,7 +1,7 @@
 # Codeigniter template
 
 ## Details
-* Current system version: _Codeigniter 2.0.3_
+* Current system version: __Codeigniter 2.0.3__
 
 ## What is it?
 This is my base codeigniter template for quickly starting any new apps, assuming they will need to connect to a database and have users login.
