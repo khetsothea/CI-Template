@@ -14,7 +14,16 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+if (isset($_SERVER['HTTP_HOST']))
+{
+	$config['base_url'] = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 'https' : 'http';
+	$config['base_url'] .= '://'. $_SERVER['HTTP_HOST'];
+	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+}
+else
+{
+	$config['base_url'] = 'http://localhost/';
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +35,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -224,7 +233,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'xFe34iHjme£6fg^dv';
 
 /*
 |--------------------------------------------------------------------------
@@ -279,7 +288,7 @@ $config['cookie_secure']	= FALSE;
 | COOKIE data is encountered
 |
 */
-$config['global_xss_filtering'] = FALSE;
+$config['global_xss_filtering'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
