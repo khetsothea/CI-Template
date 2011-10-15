@@ -16,7 +16,7 @@
  */
 
 
-class Toast_all extends Controller
+class Toast_all extends CI_Controller
 {
 	// The folder INSIDE /controllers/ where the test classes are located
 	// TODO: autoset
@@ -32,9 +32,9 @@ class Toast_all extends Controller
 	// don't conflict when run in parallel)
 	var $multithreaded = false;
 
-	function Toast_all()
+	function __construct()
 	{
-		parent::Controller();
+		parent::__construct();
 	}
 
 	function index()

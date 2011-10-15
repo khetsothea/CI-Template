@@ -5,7 +5,7 @@ class Example_tests extends Toast
 {
 	function Example_tests()
 	{
-		parent::Toast(__FILE__);
+		parent::__construct(__FILE__);
 		// Load any models, libraries etc. you need here
 	}
 
