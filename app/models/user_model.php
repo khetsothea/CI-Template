@@ -14,6 +14,7 @@ class User_model extends MY_Model
 		$fields['password'] = null;
 		$fields['display_name'] = null;
 		$fields['full_name'] = null;
+		$fields['admin'] = 0;
 		
 		parent::set_params($db_table, $fields);
 		

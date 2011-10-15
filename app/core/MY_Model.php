@@ -78,6 +78,8 @@ class MY_Model extends CI_Model
 	protected function populate( $row )
 	{
 		$pri_key = $this->primary_key;
+		
+		// Set the id of the object
 		$this->id= $row->$pri_key;
 		
 		foreach ($this->fields as $key => $value)
@@ -213,9 +215,9 @@ class MY_Model extends CI_Model
 	public function find($uid)
 	{
 		$CI = get_instance();
-		$CI->db->select($this->fields);
+		$CI->db->select('x.*');
 		$CI->db->where($this->primary_key, $uid);
-		$CI->db->from($this->db_table);
+		$CI->db->from($this->db_table.' x');
 
 		$query = $CI->db->get();
 
