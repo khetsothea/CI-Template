@@ -2,7 +2,7 @@
 
 class Bcrypt {
 
-	public $rounds;
+	private $rounds;
 	private $randomState;
 	
 	public function __construct($params = array())

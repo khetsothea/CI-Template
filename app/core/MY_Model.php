@@ -250,60 +250,63 @@ class MY_Model extends CI_Model
 
 
 
-	/**
-	*	find_where
-	*
-	*	Assuming you don't need to join any other tables
-	*	return array of objects matching "params"
-	*	Override in inheriting class if you need to do more
-	*	clever things that just get from a single table
-	*/
-	public function find_where($params = array())
-    {
-	    $exceptions	= array( 'limit', 'offset', 'order' );
-		$limit 		= array_key_exists( 'limit', $params) ? $params['limit'] : NULL;
-		$offset		= array_key_exists( 'offset', $params) ? $params['offset'] : NULL;
-		$order 		= array_key_exists( 'order', $params) ? $params['order'] : 'x.'.$this->primary_key.' ASC';
-		$CI = get_instance();
-
-		if ( $params ) {
-			foreach($params as $key => $value)
-			{
-				if ( ! in_array($key, $exceptions))
-				{
-					if (is_array($value)) {
-						$CI->db->where_in('x.'.$key, $value); }
-					else {
-						$CI->db->where('x.'.$key, $value); }
-				}
-			}
-		}
-
-    	$CI->db->order_by($order);
-
-    	$CI->db->select( 'x.*');
-
-    	$CI->db->from($this->db_table.' x');
-		$CI->db->limit($limit, $offset);
-
-    	$query = $CI->db->get();
-
-        $list = array();	// Create array to hold objects
-
-        // Assign details from each row to a User_model object
-        foreach ($query->result() as $row)
+	/*
+	 *   find_where
+	 *
+	 *   Returns an array of populate objects
+	 *   You either pass an array of field_name => value OR two separate args for value, field
+	 *
+	 *   @author    Pete Hawkins <pete@craftydevil.co.uk>
+	 *   @created   2011-06-09
+	 *   @access    public
+	 *   @return    Array of objects OR false
+	 */
+	public function find_where($field_name, $value  = null)
+	{
+		$this->db->select($this->fields);
+		
+		if (is_array($field_name))
 		{
-			$class = get_class($this);
-			$object = new $class;
-			
-			$object->populate($row);
-			$list[$object->id] = $object;
+			$loop = $field_name;
 		}
-
-		// Return the array of populated objects
-		return $list;
-    }
-
+		elseif ( ! is_null($value))
+		{
+			$loop[$field_name] = $value;
+		}
+		else
+		{
+			throw new Exception('Error in method: find_where. Either pass an array of fields => values OR pass two args[0] = field_name, args[1] = value');
+		}
+		
+		foreach ($loop as $f => $v)
+		{
+			if (is_array($v)) {
+				$this->db->where_in($f, $v); }
+			else {
+				$this->db->where($f, $v); }
+		}
+		
+		$this->db->from($this->db_table);
+		
+		$query = $this->db->get();
+		
+		if ($query->num_rows() === 0) {
+			return false;
+		}
+			
+		$result_array = array();
+		
+		foreach ($query->result() as $row)
+		{
+			$class = get_called_class();
+			$object = new $class;
+			$object->populate($row);
+			$result_array[] = $object;
+		}
+		
+		return $result_array;
+	}
+	
 }
 
 /* End of file MY_Model.php */
