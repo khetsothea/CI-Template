@@ -263,7 +263,7 @@ class MY_Model extends CI_Model
 	 */
 	public function find_where($field_name, $value  = null)
 	{
-		$this->db->select($this->fields);
+		$this->db->select('x.*');
 		
 		if (is_array($field_name))
 		{
@@ -286,7 +286,7 @@ class MY_Model extends CI_Model
 				$this->db->where($f, $v); }
 		}
 		
-		$this->db->from($this->db_table);
+		$this->db->from($this->db_table.' x');
 		
 		$query = $this->db->get();
 		
