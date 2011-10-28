@@ -13,6 +13,13 @@ class Base_Controller extends CI_Controller
 		$this->data['site_title'] = $this->config->item('site_title');
 	}
 	
+	
+	
+	/**
+	*   Check user logged in
+	*
+	*   Does what it says on the tin.
+	*/
 	protected function check_user_logged_in()
 	{
 		$user_id = $this->session->userdata('user_id');
@@ -46,6 +53,22 @@ class Base_Controller extends CI_Controller
 			// User not supposed to be here, put them to the login screen.
 			redirect('/login');
 		}
+	}
+	
+	
+	
+	/**
+	*   Render
+	*
+	*   Will render a template and guess the view path if not passed.
+	*/
+	public function render($view_path = null)
+	{
+		if (is_null($view_path)) {
+			$view_path = $this->router->fetch_class().'/'.$this->router->fetch_method(); }
+		
+		$this->template->write_view('content', $view_path, $this->data);
+		$this->template->render();
 	}
 }
 
@@ -83,6 +106,13 @@ class Admin_Controller extends Base_Controller
 		$this->check_user_is_admin();
 	}
 	
+	
+	
+	/**
+	*   Check user is admin
+	*
+	*   Checks the user is an actually real life admin
+	*/
 	private function check_user_is_admin()
 	{
 		if ($this->data['user']->admin != 1)
