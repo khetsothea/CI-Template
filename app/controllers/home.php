@@ -4,8 +4,7 @@ class Home extends Frontend_Controller {
 
 	public function index()
 	{
-		$this->template->write_view('content', 'home/index', $this->data);
-		$this->template->render();
+		$this->render();
 	}
 	
 	public function register()
@@ -17,8 +16,7 @@ class Home extends Frontend_Controller {
 		
 		if ($this->form_validation->run() === false)
 		{
-			$this->template->write_view('content', 'home/register', $this->data);
-			$this->template->render();
+			$this->render();
 		}
 		else
 		{

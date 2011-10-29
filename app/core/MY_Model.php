@@ -54,7 +54,7 @@ class MY_Model extends CI_Model
 		if (array_key_exists($name, $this->fields)) {
 			$this->$name = $value; }
 		else {
-			throw new Exception('You cannot set a property that does not exist in the defined fields for this model.', 103); }
+			throw new Exception('You cannot set a property that does not exist in the defined fields for this model. '.$name, 103); }
 	}
 
 
@@ -72,7 +72,7 @@ class MY_Model extends CI_Model
 		if (array_key_exists($name, $this->fields)) {
 			return $this->fields[$name]; }
 		else {
-			throw new Exception('You cannot get a property that does not exist in the defined fields for this model', 104); }
+			throw new Exception('You cannot get a property that does not exist in the defined fields for this model. '.$name, 104); }
 	}
 
 
@@ -263,7 +263,8 @@ class MY_Model extends CI_Model
 	 */
 	public function find_where($field_name, $value  = null)
 	{
-		$this->db->select('x.*');
+		$CI = get_instance();
+		$CI->db->select('x.*');
 		
 		if (is_array($field_name))
 		{
@@ -280,15 +281,16 @@ class MY_Model extends CI_Model
 		
 		foreach ($loop as $f => $v)
 		{
-			if (is_array($v)) {
-				$this->db->where_in($f, $v); }
-			else {
-				$this->db->where($f, $v); }
+			if (array_key_exists($f, $this->fields)) {
+				if (is_array($v)) {
+					$CI->db->where_in($f, $v); }
+				else {
+					$CI->db->where($f, $v); } }
 		}
 		
-		$this->db->from($this->db_table.' x');
+		$CI->db->from($this->db_table.' x');
 		
-		$query = $this->db->get();
+		$query = $CI->db->get();
 		
 		if ($query->num_rows() === 0) {
 			return false;

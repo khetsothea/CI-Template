@@ -15,8 +15,7 @@ class Dashboard extends App_Controller {
 		
 		if ($this->form_validation->run() === false)
 		{
-			$this->template->write_view('content', 'dashboard/login', $this->data);
-			$this->template->render();
+			$this->render();
 		}
 		else
 		{
@@ -71,7 +70,7 @@ class Dashboard extends App_Controller {
 			exit;
 		}
 		
-		echo $user->display_name;
+		echo $user->username;
 	}
 }
 
