@@ -29,8 +29,8 @@ class Base_Controller extends CI_Controller
 			try{
 				$this->data['user'] = new User_model($user_id);
 			}
-			catch (UserException $e) {
-				$this->session->set_flashdata('error', $e->getMessage());
+			catch (Exception $e) {
+				$this->session->set_flashdata('error', 'Your username / password may be wrong.');
 				redirect('/');
 				exit;
 			}

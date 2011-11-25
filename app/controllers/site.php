@@ -7,7 +7,7 @@ class Site extends Frontend_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->CI = get_instance();
+		$this->CI =& get_instance();
 	}
 	
 	public function fourohfour()

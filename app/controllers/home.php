@@ -25,7 +25,6 @@ class Home extends Frontend_Controller {
 			$this->load->library('bcrypt', $this->config->item('bcrypt_rounds'));
 			
 			try{
-				
 				// Set the users details
 				$user->username = $this->input->post('username');
 				$user->email = $this->input->post('email');

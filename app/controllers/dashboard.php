@@ -42,7 +42,7 @@ class Dashboard extends App_Controller {
 				
 				redirect($redirect_url);
 			}
-			catch (UserException $e) {
+			catch (Exception $e) {
 				$this->session->set_flashdata('error', $e->getMessage());
 				redirect('/login');
 			}
@@ -64,7 +64,7 @@ class Dashboard extends App_Controller {
 		try{
 			$user = new User_model($user_id);
 		}
-		catch (UserException $e) {
+		catch (Exception $e) {
 			$this->session->set_flashdata('error', $e->getMessage());
 			redirect('/');
 			exit;

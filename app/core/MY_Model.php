@@ -27,7 +27,7 @@ class MY_Model extends CI_Model
 	protected function set_params($db_table, $fields, $primary_key = 'id')
 	{
 		if( ! $db_table || ! $fields )
-			throw new Exception('Missing model setup parameters');
+			throw new Exception('Missing model setup parameters', 500);
 		
 		// Set name of database table
 		$this->db_table = $db_table;
@@ -54,26 +54,27 @@ class MY_Model extends CI_Model
 		if (array_key_exists($name, $this->fields)) {
 			$this->$name = $value; }
 		else {
-			throw new Exception('You cannot set a property that does not exist in the defined fields for this model. '.$name, 103); }
+			throw new Exception('You cannot set a property that does not exist in the defined fields for this model. '.$name, 500); }
 	}
 
 
 
 	/**
+	*   We cant this anymore because of how codeignter loads $this->db. :(
 	*	__get
 	*
 	*	Check if a property exists in the fields and return default value
 	*
 	*	@access public
 	*	@return BOOL
-	*/
+	*
 	public function __get($name)
 	{
 		if (array_key_exists($name, $this->fields)) {
 			return $this->fields[$name]; }
 		else {
 			throw new Exception('You cannot get a property that does not exist in the defined fields for this model. '.$name, 104); }
-	}
+	}*/
 
 
 
@@ -124,13 +125,11 @@ class MY_Model extends CI_Model
 			$insert_array[$key] = $value;
 		}
 		
-		$CI = get_instance();
-		
 		// insert array to db
-    	if ($CI->db->insert($this->db_table, $insert_array))
+    	if ($this->db->insert($this->db_table, $insert_array))
     	{
 			// data inserted, lets return the new id
-    		$insert_id = $CI->db->insert_id();
+    		$insert_id = $this->db->insert_id();
 
     		$this->id = $insert_id;
 
@@ -138,7 +137,7 @@ class MY_Model extends CI_Model
     	}
     	else
     	{
-    		throw new Exception('Record could not be added.');
+    		throw new Exception('Record could not be added.', 500);
     	}
 	}
 
@@ -166,9 +165,8 @@ class MY_Model extends CI_Model
 			$update_array[$key] = $value;
 		}
 		
-		$CI = get_instance();
-		$CI->db->where( $this->primary_key, $this->id );
-    	return $CI->db->update($this->db_table, $update_array);
+		$this->db->where( $this->primary_key, $this->id );
+    	return $this->db->update($this->db_table, $update_array);
 	}
 
 	/**
@@ -183,15 +181,14 @@ class MY_Model extends CI_Model
 	{
 		if ($this->id)
 		{
-			$CI = get_instance();
-			$CI->db->delete($this->db_table, array($this->primary_key => $this->id));
+			$this->db->delete($this->db_table, array($this->primary_key => $this->id));
 			
 			// Check the delete worked and return bool
 			return ( $this->db->affected_rows() > 0 );
 		}
     	else
     	{
-			throw new Exception('This object has no ID');
+			throw new Exception('This object has no ID', 400);
 	    }
 	}
 
@@ -205,12 +202,11 @@ class MY_Model extends CI_Model
     */
 	public function count($params = NULL)
 	{
-		$CI = get_instance();
 		if (is_array($params)) {
 			foreach ($params AS $key => $value) {
-				$CI->db->where($key,$value); } }
+				$this->db->where($key,$value); } }
 		
-		return $CI->db->count_all_results($this->db_table);
+		return $this->db->count_all_results($this->db_table);
 	}
 
 
@@ -225,12 +221,11 @@ class MY_Model extends CI_Model
 	 */
 	public function find($uid)
 	{
-		$CI = get_instance();
-		$CI->db->select('x.*');
-		$CI->db->where($this->primary_key, $uid);
-		$CI->db->from($this->db_table.' x');
+		$this->db->select('x.*');
+		$this->db->where($this->primary_key, $uid);
+		$this->db->from($this->db_table.' x');
 
-		$query = $CI->db->get();
+		$query = $this->db->get();
 
 		if ($query->num_rows() === 1)
 		{
@@ -239,12 +234,12 @@ class MY_Model extends CI_Model
 		}
 		elseif ($query->num_rows() > 1)
 		{
-			throw new Exception('multiple_matches', 102);
+			throw new Exception('Multiple matches exist for this ID, it is not unique.', 500);
 		}
 		else
 		{
 			// No results found
-			throw new exception('not_found', 101);
+			throw new exception('No record found with this ID', 404);
 		}
 	}
 
@@ -263,8 +258,7 @@ class MY_Model extends CI_Model
 	 */
 	public function find_where($field_name, $value  = null)
 	{
-		$CI = get_instance();
-		$CI->db->select('x.*');
+		$this->db->select('x.*');
 		
 		if (is_array($field_name))
 		{
@@ -276,21 +270,21 @@ class MY_Model extends CI_Model
 		}
 		else
 		{
-			throw new Exception('Error in method: find_where. Either pass an array of fields => values OR pass two args[0] = field_name, args[1] = value');
+			throw new Exception('Error in method: find_where. Either pass an array of fields => values OR pass two args[0] = field_name, args[1] = value', 500);
 		}
 		
 		foreach ($loop as $f => $v)
 		{
 			if (array_key_exists($f, $this->fields)) {
 				if (is_array($v)) {
-					$CI->db->where_in($f, $v); }
+					$this->db->where_in($f, $v); }
 				else {
-					$CI->db->where($f, $v); } }
+					$this->db->where($f, $v); } }
 		}
 		
-		$CI->db->from($this->db_table.' x');
+		$this->db->from($this->db_table.' x');
 		
-		$query = $CI->db->get();
+		$query = $this->db->get();
 		
 		if ($query->num_rows() === 0) {
 			return false;
