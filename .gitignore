@@ -1,0 +1,12 @@
+# Max system files
+.DS_Store
+*.swp
+
+# CI Logs
+app/logs/*
+!app/logs/index.html
+
+# CI Cache
+app/cache/*
+!app/cache/index.html
+!app/cache/.htaccess
