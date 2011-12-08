@@ -258,6 +258,8 @@ class MY_Model extends CI_Model
 	 */
 	public function find_where($field_name, $value  = null)
 	{
+		$result_array = array();
+		
 		$this->db->select('x.*');
 		
 		if (is_array($field_name))
@@ -286,11 +288,7 @@ class MY_Model extends CI_Model
 		
 		$query = $this->db->get();
 		
-		if ($query->num_rows() === 0) {
-			return false;
-		}
-			
-		$result_array = array();
+		if ($query->num_rows() === 0) { return $result_array; }
 		
 		foreach ($query->result() as $row)
 		{
