@@ -1,30 +1,42 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
-<!-- title & meta -->
-<title><?=$site_title;?></title>
-<meta charset="UTF-8">
+	<!-- Title &amp; Meta -->
+	<title><?=$site_title;?></title>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta name="author" content="Pete Hawkins @peteyhawkins">
+	<meta name="description" content="">
 
-<!-- stylesheets -->
-<link rel="stylesheet" href="<?=base_url('/css/layout.css');?>" type="text/css" />
-<?= $_styles ?>
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="<?=base_url('stylesheets/base.css');?>">
+	<link rel="stylesheet" href="<?=base_url('stylesheets/skeleton.css');?>">
+	<link rel="stylesheet" href="<?=base_url('stylesheets/layout.css');?>">
+	<?= $_styles ?>
 
-<script src="<?=base_url('js/jquery-1.7.1.min.js')?>"></script>
-<script src="<?=base_url('js/jquery.tools.min.js')?>"></script>
-<?= $_scripts ?>
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="<?=base_url('images/favicon.ico');?>">
+	<link rel="apple-touch-icon" href="<?=base_url('images/apple-touch-icon.png');?>">
+	<link rel="apple-touch-icon" sizes="72x72" href="<?=base_url('images/apple-touch-icon-72x72.png');?>">
+	<link rel="apple-touch-icon" sizes="114x114" href="<?=base_url('images/apple-touch-icon-114x114.png');?>">
+	
+	<!-- IE Fallbacks -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="<?=base_url('javascripts/css3-mediaqueries.js');?>"></script>
+	<![endif]-->
+
 </head>
 <body>
 
-<div id="wrapper">
-
-	<header id="page_header">
-		<h1><?=$site_title;?></h1>
-		<nav>
-			<ul>
-				<li><a href="<?=site_url('/');?>">Homepage</a></li>
-			</ul>
-		</nav>
-	</header><!-- end #page_header -->
+<div class="container">
+	<header class="sixteen columns header">
+		<h1><?=$site_title;?> <small>v0.1</small></h1>
+	</header>
 	   
 	<section id="content">
 		<?php if ($this->session->flashdata('success')): ?>
@@ -39,11 +51,18 @@
 		<?=$content;?>
 	</section><!-- end #content -->
 	
-	<footer id="page_footer">
+	<footer class="sixteen columns footer">
 		<p>&copy; Copyright <?=date('Y');?> <?=$app_name;?></p>
-	</footer><!-- end #page_footer -->
+	</footer>
+</div><!-- end .container -->
 
-</div><!-- end #wrapper -->
-
+	<!-- JS
+	================================================== -->
+	<script src="<?=base_url('javascripts/jquery-1.7.1.min.js');?>"></script>
+	<script src="<?=base_url('javascripts/json2.js');?>"></script>
+	<script src="<?=base_url('javascripts/underscore-min.js');?>"></script>
+	<script src="<?=base_url('javascripts/backbone-min.js');?>"></script>
+	<script src="<?=base_url('javascripts/handlebars-1.0.0.beta.6.js');?>"></script>
+	<?= $_scripts ?>
 </body>
 </html>
